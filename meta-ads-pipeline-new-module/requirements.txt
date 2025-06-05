@@ -1,0 +1,10 @@
+functions-framework==3.*
+google-cloud-bigquery
+pandas
+numpy==1.*
+pyarrow==14.*
+db-dtypes==1.*
+aiohttp==3.*
+pandas-gbq
+google-cloud-logging
+google-cloud-run

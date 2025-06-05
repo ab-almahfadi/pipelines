@@ -1,0 +1,70 @@
+name: Slack Notifications
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  notifySlack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify Slack
+        env:
+          SLACK_WEBHOOK_URL_APPROVAL: ${{ secrets.SLACK_WEBHOOK_URL_APPROVAL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{
+            "channel": "C088LF48XHB",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "🚀 *Pull Request Ready for Review*"
+                }
+              },
+              {
+                "type": "section",
+                "fields": [
+                  {
+                    "type": "mrkdwn",
+                    "text": "📁 *Repository:* ${{ github.repository }}"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "🖥️ *Branch:* *main*"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "📌 *Status:* *${{ github.event.pull_request.state }}*"
+                  },
+                  {
+                    "type": "mrkdwn",
+                    "text": "👨‍💻 *Author:* ${{ github.event.pull_request.user.login }}"
+                  }
+                ]
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "🔗 *Review & Feedback Needed*"
+                }
+              },
+              {
+                "type": "actions",
+                "elements": [
+                  {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "emoji": true,
+                      "text": "🔍 View Big-Query PR on GitHub"
+                    },
+                    "style": "primary",
+                    "url": "${{ github.event.pull_request.html_url }}"
+                  }
+                ]
+              }
+            ]
+          }' $SLACK_WEBHOOK_URL_APPROVAL

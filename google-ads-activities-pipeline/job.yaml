@@ -1,0 +1,43 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: google-ads-pipeline-job
+spec:
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+            - image: gcr.io/ads-data-pipeline-444412/google-ads-pipeline
+              env:
+                - name: GCP_PROJECT_ID
+                  value: "ads-data-pipeline-444412"
+                - name: BIGQUERY_DATASET_ID
+                  value: "LDX_Google_Ads_Data"
+                - name: BIGQUERY_TABLE_ID
+                  value: "LDX_google_ads_metrics_pipeline"
+                - name: GOOGLE_ADS_CLIENT_ID
+                  value: "711280396707-3rqfi27ei1hgkf0slt70gqtq3lg0m0sn.apps.googleusercontent.com"
+                - name: GOOGLE_ADS_CLIENT_SECRET
+                  value: "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"
+                - name: GOOGLE_ADS_DEVELOPER_TOKEN
+                  value: "hjiQ1bPou_rMKKSLQ0grrw"
+                - name: GOOGLE_ADS_REFRESH_TOKEN
+                  value: "1//04tj3l_awuJqxCgYIARAAGAQSNwF-L9IrCtxNiMKkxQhftt5bntZ_BX2ljAGrMNht45o98rKA0GsQx2ktlottJesTyJ96zlti864"
+                - name: GOOGLE_ADS_API_VERSION
+                  value: "v18"
+                - name: GOOGLE_ADS_LOGIN_CUSTOMER_ID
+                  value: "3738177701"
+                - name: REFRESH_WINDOW_START_DAYS_BACK
+                  value: "30"
+                - name: REFRESH_WINDOW_END_DAYS_BACK
+                  value: "1"
+                - name: LOG_EXECUTION_ID
+                  value: "true"
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: "2Gi"
+                requests:
+                  cpu: "1"
+                  memory: "2Gi"

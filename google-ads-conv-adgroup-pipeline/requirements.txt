@@ -1,0 +1,12 @@
+functions-framework==3.*
+google-cloud-bigquery==3.*
+pandas==2.*
+numpy==1.*
+pyarrow==14.*
+db-dtypes==1.*
+google-ads
+google-cloud-logging
+google-api-core
+requests==2.*
+google-auth-oauthlib
+pandas-gbq

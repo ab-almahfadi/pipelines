@@ -1,0 +1,54 @@
+name: Slack Push Notification
+
+on:
+  push:
+    branches:
+      - "*"  # Trigger on push to any branch
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Send Push Info to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_APPROVAL }}
+          REPO_NAME: ${{ github.repository }}
+          BRANCH_NAME: ${{ github.ref_name }}
+          AUTHOR_NAME: ${{ github.actor }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          PAYLOAD=$(cat <<EOF
+          {
+            "attachments": [
+              {
+                "color": "#36a64f",
+                "pretext": "🚀 *New Push to \`${BRANCH_NAME}\` in \`${REPO_NAME}\`*",
+                "fields": [
+                  {
+                    "title": "Author",
+                    "value": "${AUTHOR_NAME}",
+                    "short": true
+                  },
+                  {
+                    "title": "Branch",
+                    "value": "${BRANCH_NAME}",
+                    "short": true
+                  },
+                  {
+                    "title": "Commit Message",
+                    "value": "${COMMIT_MESSAGE}",
+                    "short": false
+                  }
+                ],
+                "footer": "GitHub Actions",
+                "ts": "$(date +%s)"
+              }
+            ]
+          }
+          EOF
+          )
+          curl -X POST -H 'Content-type: application/json' --data "${PAYLOAD}" $SLACK_WEBHOOK_URL

@@ -1,0 +1,16 @@
+# Required dependencies for the Xero refresh token pipeline
+functions-framework==3.*
+google-cloud-bigquery
+google-cloud-secret-manager
+google-cloud-storage
+pandas
+numpy==1.*
+pyarrow==14.*
+db-dtypes==1.*
+aiohttp==3.*
+pandas-gbq
+google-cloud-logging
+google-cloud-run
+requests-oauthlib==1.*
+xero-python==1.*  # Xero Python SDK
+python-dateutil==2.*

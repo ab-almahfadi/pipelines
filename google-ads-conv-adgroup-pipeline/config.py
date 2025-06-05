@@ -1,0 +1,19 @@
+"""Configuration settings for the Google Ads Pipeline."""
+
+# Google Cloud Settings
+GCP_PROJECT_ID = "ads-data-pipeline-444412"
+BIGQUERY_DATASET_ID = "PX_Google_Ads_Data"
+BIGQUERY_TABLE_ID = "PX_google_ads_metrics_pipeline_5"
+
+# Google Ads API Settings
+GOOGLE_ADS_CLIENT_ID = "513020072799-j0p6r9d50ru60b9j3r9ot48kmn3e44k4.apps.googleusercontent.com"
+GOOGLE_ADS_CLIENT_SECRET = "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"
+GOOGLE_ADS_DEVELOPER_TOKEN = "TEkfnXM6eqOo1Hthlsg2uw"
+GOOGLE_ADS_REFRESH_TOKEN = "1//04IAy9Mi52gpaCgYIARAAGAQSNwF-L9IrFdKdMKZPir5aY3eBy-F9dVUZx8tiuoX1CKvlNvR8RuDFAVPf-HHTjrL25hZAPvJVtqY"
+GOOGLE_ADS_LOGIN_CUSTOMER_ID = "3369796880"
+GOOGLE_ADS_API_VERSION = "v18"
+
+# Pipeline Settings
+REFRESH_WINDOW_START_DAYS_BACK = 4000
+REFRESH_WINDOW_END_DAYS_BACK = 0
+LOG_EXECUTION_ID = True
